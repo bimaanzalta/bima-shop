@@ -42,6 +42,16 @@
                         <i class="fa fa-users"></i> <span> Users </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('categories.index') }}">
+                        <i class="fa fa-list"></i> <span> Categories </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('books.index') }}">
+                        <i class="fa fa-book"></i> <span> Books </span>
+                    </a>
+                </li>
 
             </ul>
 

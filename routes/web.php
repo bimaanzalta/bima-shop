@@ -25,3 +25,9 @@ Route::match(["GET", "POST"], "/register", function () {
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('users', 'UserController');
+Route::get('/categories/trash', 'CategoryController@trash')->name('categories.trash');
+Route::get('/categories/{id}/restore', 'CategoryController@restore')->name('categories.restore');
+Route::delete('/categories/{id}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
+Route::get('/ajax/categories/search', 'CategoryController@ajaxSearch')->name('categories.ajax-search');
+Route::resource('categories', 'CategoryController');
+Route::resource('books', 'BookController');

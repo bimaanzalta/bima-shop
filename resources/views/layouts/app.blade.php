@@ -17,7 +17,7 @@
     <link href="{{ url('admin/css/icons.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('admin/css/metismenu.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('admin/css/style.css') }}" rel="stylesheet" type="text/css" />
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <script src="{{ url('admin/js/modernizr.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('admin/fa-icons/css/font-awesome.min.css') }}">
 </head>
@@ -85,10 +85,7 @@
     <!-- App js -->
     <script src="{{ url('admin/js/jquery.core.js') }}"></script>
     <script src="{{ url('admin/js/jquery.app.js') }}"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-
+    @yield('footer-scripts')
 </body>
 
 </html>

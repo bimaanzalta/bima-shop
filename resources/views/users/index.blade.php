@@ -81,8 +81,7 @@
                                             <a class="dropdown-item" href="{{ route('users.show',$user->id) }}"><i
                                                     class="mdi mdi-details mr-2 font-18 text-muted vertical-middle"></i>Detail</a>
                                             <a class="dropdown-item" href="{{ route('users.edit',$user->id) }}"><i
-                                                    class="mdi mdi-pencil mr-2 text-muted font-18 vertical-middle"></i>Edit
-                                                Ticket</a>
+                                                    class="mdi mdi-pencil mr-2 text-muted font-18 vertical-middle"></i>Edit</a>
                                             <form id="sa-warning" class="d-inline"
                                                 action="{{route('users.destroy', $user->id)}}" method="POST">
                                                 @csrf
