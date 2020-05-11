@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     @endif
-                    <h4 class="m-t-0 header-title">Categories</h4>
+                    <h4 class="m-t-0 header-title">Books</h4>
                     <div class="d-flex row flex-row mb-4">
                         <div class="col-12">
                             <a href="{{ route('books.create') }}"
@@ -28,9 +28,9 @@
                             <form action="{{ route('categories.index') }}">
                                 <div class="form-group row">
                                     <label class="col-2 col-form-label">Search</label>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <input class="form-control" type="search" name="name"
-                                            value="{{ Request::get('name') }}" placeholder="Filter by category name">
+                                            value="{{ Request::get('keyword') }}" placeholder="Filter by title">
                                     </div>
                                     <div class="col-2">
                                         <button type="submit"
@@ -41,13 +41,22 @@
                         </div>
                         <div class="col-4">
                             <ul class="nav nav-pills card-header-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="
-                                    {{ route('categories.index') }}">Published</a>
+                                <li class="nav-item mr-4">
+                                    <a class="nav-link {{ Request::get('status') == NULL && Request::path() == 'books' ? 'active' : '' }}"
+                                        href="
+                                    {{ route('books.index') }}">All</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item mr-4">
+                                    <a class="nav-link {{ Request::get('status') == 'publish' ? 'active' : '' }}" href="
+                                    {{ route('books.index',['status' => 'publish']) }}">Published</a>
+                                </li>
+                                <li class="nav-item mr-4">
+                                    <a class="nav-link {{ Request::get('status') == 'draft' ? 'active' : '' }}" href="
+                                    {{ route('books.index',['status' => 'draft']) }}">Draft</a>
+                                </li>
+                                <li class="nav-item mr-4 {{ Request::is('books/trash') ? 'active' : '' }}">
                                     <a class="nav-link" href="
-                                    {{ route('categories.trash') }}">Trash</a>
+                                    {{ route('books.trash') }}">Trash</a>
                                 </li>
                             </ul>
                         </div>
@@ -70,6 +79,9 @@
                             @php
                             $no = 1;
                             @endphp
+                            @if ($books == NULL)
+                            <tr></tr>
+                            @else
                             @foreach ($books as $book)
                             <tr>
                                 <th scope="row">{{ $no++ }}</th>
@@ -103,6 +115,7 @@
                                     {{ $book->price }}
                                 </td>
                                 <td>
+                                    @if (Request::is('books'))
                                     <div class="btn-group dropdown">
                                         <a href="javascript: void(0);"
                                             class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-sm"
@@ -123,9 +136,30 @@
                                             </form>
                                         </div>
                                     </div>
+                                    @endif
+                                    @if (Request::is('books/trash'))
+                                    <div class="btn-group dropdown">
+                                        <a href="javascript: void(0);"
+                                            class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-sm"
+                                            data-toggle="dropdown" aria-expanded="false"><i
+                                                class="mdi mdi-dots-horizontal"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="{{ route('books.restore',$book->id) }}"><i
+                                                    class="mdi mdi-backup-restore mr-2 text-muted font-18 vertical-middle"></i>Restore</a>
+                                            <form id="sa-warning" class="d-inline"
+                                                action="{{route('books.delete-permanent', $book->id)}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button class="dropdown-item" href="#"><i
+                                                        class="mdi mdi-delete mr-2 text-muted font-18 vertical-middle"></i>Remove</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

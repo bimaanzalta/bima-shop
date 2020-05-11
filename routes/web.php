@@ -26,8 +26,11 @@ Route::match(["GET", "POST"], "/register", function () {
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('users', 'UserController');
 Route::get('/categories/trash', 'CategoryController@trash')->name('categories.trash');
-Route::get('/categories/{id}/restore', 'CategoryController@restore')->name('categories.restore');
-Route::delete('/categories/{id}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
+Route::get('/categories/{category}/restore', 'CategoryController@restore')->name('categories.restore');
+Route::delete('/categories/{category}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
 Route::get('/ajax/categories/search', 'CategoryController@ajaxSearch')->name('categories.ajax-search');
 Route::resource('categories', 'CategoryController');
+Route::get('/books/trash', 'BookController@trash')->name('books.trash');
+Route::get('/books/{book}/restore', 'BookController@trash')->name('books.restore');
+Route::delete('/books/{book}/delete-permanent', 'BookController@deletePermanent')->name('books.delete-permanent');
 Route::resource('books', 'BookController');

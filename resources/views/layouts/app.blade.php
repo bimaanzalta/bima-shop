@@ -20,6 +20,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <script src="{{ url('admin/js/modernizr.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('admin/fa-icons/css/font-awesome.min.css') }}">
+    <livewire:styles></livewire:styles>
 </head>
 
 
@@ -85,6 +86,8 @@
     <!-- App js -->
     <script src="{{ url('admin/js/jquery.core.js') }}"></script>
     <script src="{{ url('admin/js/jquery.app.js') }}"></script>
+
+    <livewire:scripts></livewire:scripts>
     @yield('footer-scripts')
 </body>
 
